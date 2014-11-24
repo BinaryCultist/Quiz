@@ -27,7 +27,7 @@ public class server_main {
             oos.writeObject("Bye.");
         } catch (IOException e) {
             System.out.println("Exception caught when trying to listen on port "
-                + portNumber + " or listening for a connection");
+                + portNumber + " or listening for a connection.");
             System.out.println(e.getMessage());
         }
     }
