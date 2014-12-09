@@ -17,7 +17,7 @@ public class GUIListener extends WindowAdapter implements ActionListener, CaretL
 	private JButton btn_menu;
 	private ClientGUI cg;
 	
-	public void actionPerformed(ActionEvent event)
+	public void actionPerformed(ActionEvent event)		//Action Buttons
 	{
 		if(event.getSource() == btn_game)
 		{
