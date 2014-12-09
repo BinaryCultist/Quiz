@@ -19,5 +19,6 @@ public class Main
 		ClientGUI frame = new ClientGUI();
 		/*frame.setResizable(false);*/				//Fenstergröße nicht veränderbar
 		frame.setVisible(true);						//Sichtbar
+		// Neue Zeile von Steve
 	}
 }
