@@ -4,12 +4,12 @@ import java.io.*;
 public class server_main {
     public static void main(String[] args) throws IOException {
         
-        if (args.length != 1) {
+      /*  if (args.length != 1) {
             System.err.println("Usage: java server_main <port number>");
-            System.exit(1);
-        }
+            System.exit(1); 
+        } */
 
-        int portNumber = Integer.parseInt(args[0]);
+        int portNumber = 4444;  // Integer.parseInt(args[0]);
 
         try ( 
             ServerSocket serverSocket = new ServerSocket(portNumber);
@@ -22,9 +22,9 @@ public class server_main {
         ) {        
 
             server_questionlist ql = new server_questionlist();
-            ql.run();            
-            oos.writeObject(ql.fragen());            
-            oos.writeObject("Bye.");
+            ql.run();
+            System.out.println("Run erfolgt");
+            oos.writeObject(ql.fragen());
         } catch (IOException e) {
             System.out.println("Exception caught when trying to listen on port "
                 + portNumber + " or listening for a connection.");

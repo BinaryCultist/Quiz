@@ -1,29 +1,33 @@
 import java.io.*;
+import java.util.ArrayList;
 
 public class server_questionlist {
 
-	public static void main(String[] args) {
-		 
+	public static void main(String[] args) {		 
 		server_questionlist obj = new server_questionlist();
-		obj.run();
-	 
+		obj.run();	 
 	  }
 
-	private String[] fragen;
+	private ArrayList<Frage> fragen = new ArrayList<Frage>();
 	
-	  public void run() {
-	 
+	  public void run() {	 
 		String csvFile = "/home/daedalus/workspace/Quiz/fragen.csv";
 		BufferedReader br = null;
 		String line = "";
 		String cvsSplitBy = ";";
 	 
-		try {
-	 
+		try {	 
 			br = new BufferedReader(new FileReader(csvFile));
 			while ((line = br.readLine()) != null) {	 
-			        
-				 fragen = line.split(cvsSplitBy);
+				Frage f = new Frage();
+				String [] element = line.split(cvsSplitBy);
+				f.Frage = element[0];
+				f.Antwort1 = element[1];
+				f.Antwort2 = element[2];
+				f.Antwort3 = element[3];
+				f.Antwort4 = element[4];
+				f.RichtigeAntwort = Integer.parseInt(element[5]);				
+				fragen.add(f);				
 			}
 	 
 		} catch (FileNotFoundException e) {
@@ -43,7 +47,7 @@ public class server_questionlist {
 		System.out.println("Done");
 	  }
 
-	public String[] fragen() {
-		return fragen;
+	public Object[] fragen() {
+		return fragen.toArray();
 	}
 }
