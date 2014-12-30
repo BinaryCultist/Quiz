@@ -16,10 +16,9 @@ public class client_main {
         try (
             Socket kkSocket = new Socket(hostName, portNumber);
             PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);
-        		
+
         	InputStream is = kkSocket.getInputStream();
         		ObjectInputStream ois = new ObjectInputStream(is);
-        		
         		
             BufferedReader in = new BufferedReader(
                 new InputStreamReader(kkSocket.getInputStream()));
