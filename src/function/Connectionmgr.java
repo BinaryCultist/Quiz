@@ -1,6 +1,6 @@
 package function;
 
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 
@@ -10,6 +10,25 @@ public class Connectionmgr
 	private String name = null;
 	private InetAddress address = null;
 	private byte[] ip = new byte[0];
+	
+	private static int richtig = 5; // Wert 5: Zwischenzustand bis neue Frage angefordert wurde
+	private static String[] fragen;
+	
+	public void clear() // Aufzurufen, sobald User die Frage erhalten hat
+	{
+		fragen = null;
+		richtig = 5;
+	}
+	
+	public String[] getFragen() // Aufzurufen in der GUI
+	{
+		return fragen;
+	}
+	
+	public boolean antwortRichtig(int antwortUser) // ï¿½berprï¿½fung der User-Antwort
+	{
+		return antwortUser == richtig;
+	}
 	
 	public void connectionless()
 	{		
@@ -44,17 +63,49 @@ public class Connectionmgr
 			System.out.println(s.getReuseAddress());        // false
 			System.out.println(s.getReceiveBufferSize());   // 8192
 			System.out.println(s.getSendBufferSize());      // 8192
-			System.out.println(s.getSoLinger());            // –1
+			System.out.println(s.getSoLinger());            // ï¿½1
 			System.out.println(s.getTcpNoDelay());          // false
 			System.out.println(s.getTrafficClass());        // 0
 			 */
-			ObjectOutputStream os;
 			
-			os = new ObjectOutputStream(s.getOutputStream());
-			os.writeObject(new String("Hallo Server"));
-			os.flush();
-			os.close();
-			s.close();
+			PrintWriter toServer = new PrintWriter(s.getOutputStream());
+    		ObjectInputStream ois = new ObjectInputStream(s.getInputStream()); // Quizdaten und weitere Kommunikation vom Server
+    		
+    		//BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+
+    		BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
+    		String fromServer;
+    		String fromUser;
+    		Object o;
+    		while (( o = ois.readObject()) != null) {	// Solange Server Daten sendet
+    			System.out.println(o.getClass().getSimpleName());
+    			if (o instanceof String[]) {
+    				fragen = (String[]) o;
+    				richtig = Integer.parseInt(fragen[5]);
+    				System.out.println("Frage 1: " + fragen[0] + " Antwort 1: " + fragen[1] + 
+    						" Antwort 2: " + fragen[2] + " Antwort 3: " + fragen[3] + 
+    						" Antwort 4: " + fragen[4] + " Richtige Antwort: " + fragen[5]);
+
+    	    		toServer.println("Success."); // Rï¿½ckmeldung an Server
+    			}
+    			if (o instanceof String) {
+    				fromServer = (String) o;
+    				System.out.println("Server: " + fromServer);
+    				if (fromServer.equals("Bye."))
+    					break;
+    			}  
+
+    			fromUser = stdIn.readLine();
+    			if (fromUser != null) {
+    				System.out.println("Client: " + fromUser);
+    				toServer.println(fromUser);
+    			}
+    		}
+    		System.out.println("Done.");
+
+    		toServer.flush();
+    		toServer.close();
+    		s.close();
 		}
 		catch (Exception e)
 		{

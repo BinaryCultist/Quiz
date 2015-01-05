@@ -1,13 +1,13 @@
 package main;
 
-import gui.QuizcatFrame;
+import gui.ClientGUI;
 import javax.swing.UIManager;
- 
+
 public class Main
 {
-    public static void main(String[] args)
-    {
-    	try
+	public static void main(String[]args)
+	{
+		try
     	{
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		}
@@ -15,9 +15,9 @@ public class Main
     	{
 			e.printStackTrace();
 		}
-    	
-    	QuizcatFrame frame = new QuizcatFrame();
-    	/*frame.setResizable(false);*/				//Fenstergröße nicht veränderbar
-    	frame.setVisible(true);						//Sichtbar
-    }
+		
+		ClientGUI frame = new ClientGUI();
+		/*frame.setResizable(false);*/				//Fenstergrï¿½ï¿½e nicht verï¿½nderbar
+		frame.setVisible(true);						//Sichtbar
+	}
 }
