@@ -22,9 +22,9 @@ public class server_main {
         ) {        
 
             server_questionlist ql = new server_questionlist();
-            ql.run();
-            System.out.println("Run erfolgt");
-            oos.writeObject(ql.fragen());
+            ql.fragenausdateilesen();
+            System.out.println("Fragen gelesen erfolgt");
+            oos.writeObject(ql.allefragen());
         } catch (IOException e) {
             System.out.println("Exception caught when trying to listen on port "
                 + portNumber + " or listening for a connection.");

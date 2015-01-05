@@ -1,17 +1,31 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class server_questionlist {
 
-	public static void main(String[] args) {		 
+/*	public static void main(String[] args) {		 
 		server_questionlist obj = new server_questionlist();
 		obj.run();	 
-	  }
+	  } */
 
-	private ArrayList<Frage> fragen = new ArrayList<Frage>();
+	private ArrayList<Frage> fragen1 = new ArrayList<Frage>();
+	private ArrayList<Frage> fragen2 = new ArrayList<Frage>();
+	private ArrayList<Frage> fragen3 = new ArrayList<Frage>();
+	private ArrayList<Frage> fragen4 = new ArrayList<Frage>();
+	private ArrayList<Frage> fragen5 = new ArrayList<Frage>();
 	
-	  public void run() {	 
-		String csvFile = "/home/daedalus/workspace/Quiz/fragen.csv";
+	public void fragenausdateilesen() {
+		fragen1 = fragenausdateilesen_intern("/home/daedalus/workspace/Quiz/fragen1.csv");
+		fragen2 = fragenausdateilesen_intern("/home/daedalus/workspace/Quiz/fragen2.csv");
+		fragen3 = fragenausdateilesen_intern("/home/daedalus/workspace/Quiz/fragen3.csv");
+		fragen4 = fragenausdateilesen_intern("/home/daedalus/workspace/Quiz/fragen4.csv");
+		fragen5 = fragenausdateilesen_intern("/home/daedalus/workspace/Quiz/fragen5.csv");
+	}
+	
+	  public ArrayList<Frage> fragenausdateilesen_intern(String dateiname) {
+		String csvFile = dateiname;
+		ArrayList<Frage> fragentemp = new ArrayList<Frage>();
 		BufferedReader br = null;
 		String line = "";
 		String cvsSplitBy = ";";
@@ -27,7 +41,7 @@ public class server_questionlist {
 				f.Antwort3 = element[3];
 				f.Antwort4 = element[4];
 				f.RichtigeAntwort = Integer.parseInt(element[5]);				
-				fragen.add(f);				
+				fragentemp.add(f);				
 			}
 	 
 		} catch (FileNotFoundException e) {
@@ -45,9 +59,55 @@ public class server_questionlist {
 		}
 	 
 		System.out.println("Done");
+		return fragentemp;
 	  }
+	  
+		private ArrayList<Frage> randomzehn(ArrayList<Frage> fragen) {
+			ArrayList<Frage> fragentemp = new ArrayList<Frage>();
+			Random r = new Random();
+			for (int i = 0; i < 10; i++) {
+				fragentemp.add(fragen.get(r.nextInt(fragen.size() - 1)));
+			}
+			return fragentemp;
+		}
 
-	public Object[] fragen() {
-		return fragen.toArray();
+/*	private ArrayList<Frage> fragen1() {
+		fragen1 = randomzehn (fragen1);
+		return fragen1;
+	}
+
+	public ArrayList<Frage> fragen2() {
+		fragen2 = randomzehn (fragen2);
+		return fragen2.;
+	}
+	
+	public ArrayList<Frage> fragen3() {
+		fragen3 = randomzehn (fragen3);
+		return fragen3.toArray();
+	}
+	
+	public ArrayList<Frage> fragen4() {
+		fragen4 = randomzehn (fragen4);
+		return fragen4.toArray();
+	}
+	
+	public ArrayList<Frage> fragen5() {
+		fragen5 = randomzehn (fragen5);
+		return fragen5.toArray();
+	}*/
+	
+	public Object[] allefragen() {
+		ArrayList<Frage> fragentemp = new ArrayList<Frage>();
+		fragen1 = randomzehn (fragen1);
+		fragen2 = randomzehn (fragen2);
+		fragen3 = randomzehn (fragen3);
+		fragen4 = randomzehn (fragen4);
+		fragen5 = randomzehn (fragen5);
+		fragentemp.addAll(fragen1);
+		fragentemp.addAll(fragen2);
+		fragentemp.addAll(fragen3);
+		fragentemp.addAll(fragen4);
+		fragentemp.addAll(fragen5);		
+		return fragentemp.toArray();
 	}
 }
