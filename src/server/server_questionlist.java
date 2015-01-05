@@ -13,11 +13,11 @@ public class server_questionlist {
 	private ArrayList<Frage> fragen5 = new ArrayList<Frage>();
 	
 	public void fragenausdateilesen() {
-		fragen1 = fragenausdateilesen_intern("fragen1.csv");
-		fragen2 = fragenausdateilesen_intern("fragen2.csv");
-		fragen3 = fragenausdateilesen_intern("fragen3.csv");
-		fragen4 = fragenausdateilesen_intern("fragen4.csv");
-		fragen5 = fragenausdateilesen_intern("fragen5.csv");
+		fragen1 = fragenausdateilesen_intern("/home/daedalus/workspace/Quiz/src/server/fragen1.csv");
+		fragen2 = fragenausdateilesen_intern("/home/daedalus/workspace/Quiz/src/server/fragen2.csv");
+		fragen3 = fragenausdateilesen_intern("/home/daedalus/workspace/Quiz/src/server/fragen3.csv");
+		fragen4 = fragenausdateilesen_intern("/home/daedalus/workspace/Quiz/src/server/fragen4.csv");
+		fragen5 = fragenausdateilesen_intern("/home/daedalus/workspace/Quiz/src/server/fragen5.csv");
 	}
 	
 	  public ArrayList<Frage> fragenausdateilesen_intern(String dateiname) {

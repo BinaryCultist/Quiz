@@ -1,17 +1,12 @@
 import java.io.*;
 import java.net.*;
+import server.*;
 
 public class client_main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         
-       /* if (args.length != 2) {
-            System.err.println(
-                "Usage: java client_main <host name> <port number>");
-            System.exit(1);
-        } */
-
-        String hostName = "127.0.0.1"; //args[0];
-        int portNumber = 4444; // Integer.parseInt(args[1]);
+        String hostName = "127.0.0.1";
+        int portNumber = 4444;
 
         try (
             Socket kkSocket = new Socket(hostName, portNumber);
@@ -26,25 +21,20 @@ public class client_main {
         ) {
             BufferedReader stdIn =
                 new BufferedReader(new InputStreamReader(System.in));
-            String fromServer;
             String fromUser;
             Object o;
             while (( o = ois.readObject()) != null) {
-            	System.out.println(o.getClass().getSimpleName());
+            	//System.out.println(o.getClass().getSimpleName());
             	if (o instanceof Object[]) {
+            		int i = 0;
             		for (Object obj : (Object[])o) {
             			Frage frage = (Frage) obj;
-            			System.out.println("Frage 1: " + frage.Frage + " Antwort 1: " + frage.Antwort1 + 
+            			i++;
+            			System.out.println("Frage " + i + ": " + frage.Frage + " Antwort 1: " + frage.Antwort1 + 
 							" Antwort 2: " + frage.Antwort2 + " Antwort 3: " + frage.Antwort3 + 
 							" Antwort 4: " + frage.Antwort4 + " Richtige Antwort: " + frage.RichtigeAntwort);					
 					} 
             	}      	
-            	/* if (o instanceof String) {
-					 fromServer = (String) o;
-					 System.out.println("Server: " + fromServer);
-		                if (fromServer.equals("Bye."))
-		                    break;
-				} */
                 
                 fromUser = stdIn.readLine();
                 if (fromUser != null) {
