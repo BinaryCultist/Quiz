@@ -25,7 +25,7 @@ public class client_gui extends JFrame implements ActionListener {
     	pane.add("Auswahl", outside);
 		outside.setLayout(new BoxLayout(outside, BoxLayout.LINE_AXIS));
 		menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.PAGE_AXIS));
-		
+		pack();
 		outside.add(Box.createHorizontalStrut(300));
 		outside.add(menuPanel);
 		outside.add(Box.createHorizontalStrut(300));
