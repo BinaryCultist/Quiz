@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class server_questionlist {
+public class Questionlist {
 
 	private ArrayList<Frage> fragen1 = new ArrayList<Frage>(); // Konstruktor für Arrayliste der Fragen Kategorie 1
 	private ArrayList<Frage> fragen2 = new ArrayList<Frage>();
