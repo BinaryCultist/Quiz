@@ -1,29 +1,28 @@
 package gui;
+
 import java.io.*;
 import java.net.*;
 import server.*;
 
-public class client_main {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+public class Client_main {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {    	
         
         String hostName = "127.0.0.1"; // Server läuft auf Localhost, ansonsten Server-IP
         int portNumber = 4444; // Verbindungs-Port auf dem Server
 
         try (
-            Socket kkSocket = new Socket(hostName, portNumber); // Öffnen eines Sockets zum Server
-            PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);
+            Socket serversocket = new Socket(hostName, portNumber); // Öffnen eines Sockets zum Server
+            PrintWriter out = new PrintWriter(serversocket.getOutputStream(), true);
         		
-        	InputStream is = kkSocket.getInputStream();
+        	InputStream is = serversocket.getInputStream();
         	ObjectInputStream ois = new ObjectInputStream(is);        		
         		
-            BufferedReader in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(serversocket.getInputStream()));
+        	BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
         ) {
-            BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-            String fromUser;
-            
+        	
             Object o;
             while (( o = ois.readObject()) != null) {
-            	//System.out.println(o.getClass().getSimpleName());
             	if (o instanceof Object[]) {
             		int i = 0;
             		for (Object obj : (Object[])o) {
@@ -33,14 +32,23 @@ public class client_main {
 						" Antwort 2: " + frage.Antwort2 + " Antwort 3: " + frage.Antwort3 + 
 						" Antwort 4: " + frage.Antwort4 + " Richtige Antwort: " + frage.RichtigeAntwort);					
 					} 
-            	}      	
-                
-            	fromUser = stdIn.readLine();
-            	if (fromUser != null) {
-            		System.out.println("Client: " + fromUser);
-            		out.println(fromUser);
             	}
+            	
+            	String usereingabe;
+            	usereingabe = stdIn.readLine();            	
+            	
+            	do  {
+            		try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						System.out.println("Fehler");
+						e.printStackTrace();
+					}
+            	} while (usereingabe == null);
+            	System.out.println("exit");
+            	System.exit(0);
             }
+            
         } catch (UnknownHostException e) {
             System.err.println("Don't know about host " + hostName);
             System.exit(1);
@@ -48,6 +56,6 @@ public class client_main {
             System.err.println("Couldn't get I/O for the connection to " +
                 hostName);
             System.exit(1);
-        }
+        }    	
     }
 }
