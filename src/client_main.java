@@ -1,56 +1,45 @@
 import java.io.*;
 import java.net.*;
+import server.*;
 
 public class client_main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         
-        if (args.length != 2) {
-            System.err.println(
-                "Usage: java client_main <host name> <port number>");
-            System.exit(1);
-        }
-
-        String hostName = args[0];
-        int portNumber = Integer.parseInt(args[1]);
+        String hostName = "127.0.0.1"; // Server läuft auf Localhost, ansonsten Server-IP
+        int portNumber = 4444; // Verbindungs-Port auf dem Server
 
         try (
-            Socket kkSocket = new Socket(hostName, portNumber);
+            Socket kkSocket = new Socket(hostName, portNumber); // Öffnen eines Sockets zum Server
             PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);
         		
         	InputStream is = kkSocket.getInputStream();
-        		ObjectInputStream ois = new ObjectInputStream(is);
+        	ObjectInputStream ois = new ObjectInputStream(is);        		
         		
-        		
-            BufferedReader in = new BufferedReader(
-                new InputStreamReader(kkSocket.getInputStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
         ) {
-            BufferedReader stdIn =
-                new BufferedReader(new InputStreamReader(System.in));
-            String fromServer;
+            BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
             String fromUser;
+            
             Object o;
             while (( o = ois.readObject()) != null) {
-            	System.out.println(o.getClass().getSimpleName());
-            	if (o instanceof String[]) {
-					 String[] fragen = (String[]) o;
-					 System.out.println("Frage 1: " + fragen[0] + " Antwort 1: " + fragen[1] + 
-								" Antwort 2: " + fragen[2] + " Antwort 3: " + fragen[3] + 
-								" Antwort 4: " + fragen[4] + " Richtige Antwort: " + fragen[5]);
-				}
-            	if (o instanceof String) {
-					 fromServer = (String) o;
-					 System.out.println("Server: " + fromServer);
-		                if (fromServer.equals("Bye."))
-		                    break;
-				}  
+            	//System.out.println(o.getClass().getSimpleName());
+            	if (o instanceof Object[]) {
+            		int i = 0;
+            		for (Object obj : (Object[])o) {
+            			Frage frage = (Frage) obj;
+            			i++;
+            			System.out.println("Frage " + i + ": " + frage.Frage + " Antwort 1: " + frage.Antwort1 + 
+						" Antwort 2: " + frage.Antwort2 + " Antwort 3: " + frage.Antwort3 + 
+						" Antwort 4: " + frage.Antwort4 + " Richtige Antwort: " + frage.RichtigeAntwort);					
+					} 
+            	}      	
                 
-                fromUser = stdIn.readLine();
-                if (fromUser != null) {
-                    System.out.println("Client: " + fromUser);
-                    out.println(fromUser);
-                }
+            	fromUser = stdIn.readLine();
+            	if (fromUser != null) {
+            		System.out.println("Client: " + fromUser);
+            		out.println(fromUser);
+            	}
             }
-            System.out.println("Bla");
         } catch (UnknownHostException e) {
             System.err.println("Don't know about host " + hostName);
             System.exit(1);
