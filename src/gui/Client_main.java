@@ -34,19 +34,9 @@ public class Client_main {
 					} 
             	}
             	
-            	String usereingabe;
-            	usereingabe = stdIn.readLine();            	
-            	
-            	do  {
-            		try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						System.out.println("Fehler");
-						e.printStackTrace();
-					}
-            	} while (usereingabe == null);
-            	System.out.println("exit");
-            	System.exit(0);
+            	stdIn.readLine();
+            	System.out.println("Exit");
+            	System.exit(0);         	
             }
             
         } catch (UnknownHostException e) {
