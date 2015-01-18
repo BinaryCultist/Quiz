@@ -7,10 +7,20 @@ public class Server_main {
     public static void main(String[] args) throws IOException {
         
         int portNumber = 4444; // Portnummer wo der Server auf Verbindung wartet
+        boolean listening = true;
         
-        while (true) { // Server läuft konstant
+        // while (true) { // Server läuft konstant
+        
+        try (ServerSocket serversocket = new ServerSocket(portNumber)) { 
+            while (listening) {
+	            new Server_thread(serversocket.accept()).start();
+	        }
+	    } catch (IOException e) {
+            System.err.println("Fehler mit Port " + portNumber);
+            System.exit(-1);
+        }
 
-	        try ( 
+/*	        try ( 
 	            ServerSocket serversocket = new ServerSocket(portNumber); // Socket wird erstellt mit obiger Portnummer, Exception wenn Port belegt.
 	            Socket clientsocket = serversocket.accept(); // Server wartet auf Verbindung und bei Erfolg wird dem Client ein Socket gegeben
 	            OutputStream os = clientsocket.getOutputStream(); // Stream von Bytes können an ClientSocket übergeben und geschrieben werden
@@ -29,6 +39,6 @@ public class Server_main {
 	                + portNumber + " oder beim Verbinden.");
 	            System.out.println(e.getMessage());
 	        }
-        }
+        } */
     }
 }
