@@ -1,0 +1,109 @@
+package gui;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Panel_login extends JPanel {
+	private static final long serialVersionUID = 1L;
+	
+	public Panel_login() {
+		//Container pane = new Container();
+		//CardLayout layout = new CardLayout();
+		JLabel headline = new JLabel("Quiz KMI 13");
+		JLabel usernamelabel = new JLabel("Benutzername:");
+		JTextField username = new JTextField();
+		JLabel passwordlabel = new JLabel("Passwort:");
+		JTextField password = new JTextField();
+		JButton but_login = new JButton("Login");
+		JButton but_newuser = new JButton("New User");
+		
+		ActionListener aL = new Button_Listener(but_login, but_newuser);
+		
+    	Dimension d = new Dimension(200,50);
+		Dimension t = new Dimension(150,25);
+		Dimension t2 = new Dimension(200,50);
+		//Dimension t3 = new Dimension(400,100);
+		Font font = new Font("Arial", Font.PLAIN, 18);
+		Font font2 = new Font("Arial", Font.PLAIN, 30);
+		
+		//setLayout(layout);
+		//pane = this.getContentPane();
+		
+		//JPanel Panel_login = new JPanel();
+    	//setLayout(new BoxLayout(Panel_login, BoxLayout.Y_AXIS));
+    	setBackground(Color.GRAY);
+    	//pane.add("Panel-Login", Panel_login);
+    	
+    	add(Box.createVerticalStrut(20));		
+
+		headline.setMaximumSize(t2);
+		headline.setMinimumSize(t2);
+		headline.setPreferredSize(t2);
+		headline.setFont(font2);
+		headline.setAlignmentX(Component.CENTER_ALIGNMENT);
+		add(headline);
+		
+		add(Box.createVerticalStrut(80));
+		
+		//usernamelabel = new JLabel("Benutzername:");
+		usernamelabel.setMaximumSize(t);
+		usernamelabel.setMinimumSize(t);
+		usernamelabel.setPreferredSize(t);
+		usernamelabel.setFont(font);
+		usernamelabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		add(usernamelabel);
+		
+		add(Box.createVerticalStrut(10));
+		
+		//username = new JTextField();
+		username.setMaximumSize(t);
+		username.setMinimumSize(t);
+		username.setPreferredSize(t);
+		username.setFont(font);
+		username.setAlignmentX(Component.CENTER_ALIGNMENT);
+		add(username);
+		
+		add(Box.createVerticalStrut(20));
+		
+		//passwordlabel = new JLabel("Passwort:");
+		passwordlabel.setMaximumSize(t);
+		passwordlabel.setMinimumSize(t);
+		passwordlabel.setPreferredSize(t);
+		passwordlabel.setFont(font);
+		passwordlabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		add(passwordlabel);
+		
+		add(Box.createVerticalStrut(10));
+		
+		//password = new JTextField();
+		password.setMaximumSize(t);
+		password.setMinimumSize(t);
+		password.setPreferredSize(t);
+		password.setFont(font);
+		password.setAlignmentX(Component.CENTER_ALIGNMENT);
+		add(password);
+		
+		add(Box.createVerticalStrut(20));
+		
+		//but_login = new JButton("Login");
+		but_login.setSize(d);
+    	but_login.setMinimumSize(d);
+    	but_login.setMaximumSize(d);
+    	but_login.setPreferredSize(d);    	
+    	but_login.addActionListener(aL);
+    	but_login.setAlignmentX(Component.CENTER_ALIGNMENT);
+    	add(but_login);
+    	  	
+    	add(Box.createVerticalStrut(20));
+    	
+		//but_newuser = new JButton("New User");
+		but_newuser.setSize(d);
+		but_newuser.setMinimumSize(d);
+		but_newuser.setMaximumSize(d);
+		but_newuser.setPreferredSize(d);	
+		but_newuser.addActionListener(aL);
+		but_newuser.setAlignmentX(Component.CENTER_ALIGNMENT);
+    	add(but_newuser);    	
+	}
+}

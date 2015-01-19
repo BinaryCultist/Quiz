@@ -3,8 +3,12 @@ package gui;
 import java.io.*;
 import java.net.*;
 import server.*;
+import javax.swing.*;
 
 public class Client_main {
+	
+	public static Panel_GUI GUI;
+	
     public static void main(String[] args) throws IOException, ClassNotFoundException {    	
         
         String hostName = "127.0.0.1"; // Server läuft auf Localhost, ansonsten Server-IP
@@ -21,6 +25,14 @@ public class Client_main {
         	BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
         ) {
         	
+        	GUI = new Panel_GUI();
+    		GUI.setTitle("Quiz");
+    		GUI.setSize(800, 600);
+    		GUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    		GUI.setVisible(true);
+    		GUI.setResizable(false);	
+    		
+        	
             Object o;
             while (( o = ois.readObject()) != null) {
             	if (o instanceof Object[]) {
@@ -30,7 +42,7 @@ public class Client_main {
             			i++;
             			System.out.println("Frage " + i + ": " + frage.Frage + " Antwort 1: " + frage.Antwort1 + 
 						" Antwort 2: " + frage.Antwort2 + " Antwort 3: " + frage.Antwort3 + 
-						" Antwort 4: " + frage.Antwort4 + " Richtige Antwort: " + frage.RichtigeAntwort);					
+						" Antwort 4: " + frage.Antwort4 + " Richtige Antwort: " + frage.RichtigeAntwort);				
 					} 
             	}
             	
