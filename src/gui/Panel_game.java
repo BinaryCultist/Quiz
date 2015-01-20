@@ -11,7 +11,6 @@ public class Panel_game extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	public Panel_game() {		
-		
 		String Antwort1 = "Ant 1";
 		String Antwort2 = "Ant 2";
 		String Antwort3 = "Ant 3";
@@ -26,16 +25,11 @@ public class Panel_game extends JPanel {
     	
 		ActionListener aL = new Button_Listener(but_antwort1, but_antwort2, but_antwort3, but_antwort4, but_nextquestion);
 		
-		//setLayout(new BoxLayout(Panel_game, BoxLayout.Y_AXIS));
     	setBackground(Color.BLUE);    	
-    	//pane.add("Game", gamePanel);
     	
     	Dimension d = new Dimension(200,50);
-		//Dimension t = new Dimension(150,25);
-		//Dimension t2 = new Dimension(200,50);
 		Dimension t3 = new Dimension(400,100);
 		Font font = new Font("Arial", Font.PLAIN, 18);
-		//Font font2 = new Font("Arial", Font.PLAIN, 30);
     	
 		add(Box.createVerticalStrut(20));    	
     	
@@ -59,12 +53,8 @@ public class Panel_game extends JPanel {
 		JPanel buttonPanel1 = new JPanel();
 		buttonPanel1.setLayout(new BoxLayout(buttonPanel1, BoxLayout.LINE_AXIS));
 		
-		//String Antwort1 = "Ant 1";
-		//String Antwort2 = "Ant 2";
-		
 		buttonPanel1.add(Box.createRigidArea(new Dimension(100, 0)));
 		
-    	//but_antwort1 = new JButton(Antwort1);
     	but_antwort1.setSize(d);
     	but_antwort1.setMinimumSize(d);
     	but_antwort1.setMaximumSize(d);
@@ -75,7 +65,6 @@ public class Panel_game extends JPanel {
     	
     	buttonPanel1.add(Box.createHorizontalGlue());
     	
-    	//but_antwort2 = new JButton(Antwort2);
     	but_antwort2.setSize(d);
     	but_antwort2.setMinimumSize(d);
     	but_antwort2.setMaximumSize(d);
@@ -94,12 +83,8 @@ public class Panel_game extends JPanel {
 		JPanel buttonPanel2 = new JPanel();
 		buttonPanel2.setLayout(new BoxLayout(buttonPanel2, BoxLayout.LINE_AXIS));
 		
-		//String Antwort3 = "Ant 3";
-		//String Antwort4 = "Ant 4";
-		
 		buttonPanel2.add(Box.createRigidArea(new Dimension(100, 0)));
 		
-    	//but_antwort3 = new JButton(Antwort3);
     	but_antwort3.setSize(d);
     	but_antwort3.setMinimumSize(d);
     	but_antwort3.setMaximumSize(d);
@@ -110,7 +95,6 @@ public class Panel_game extends JPanel {
     	
     	buttonPanel2.add(Box.createHorizontalGlue());
     	
-    	//but_antwort4 = new JButton(Antwort4);
     	but_antwort4.setSize(d);
     	but_antwort4.setMinimumSize(d);
     	but_antwort4.setMaximumSize(d);
@@ -131,7 +115,6 @@ public class Panel_game extends JPanel {
 
     	buttonPanel3.add(Box.createHorizontalGlue());
 		
-		//but_nextquestion = new JButton("Nächste Frage");
 		but_nextquestion.setSize(d);
 		but_nextquestion.setMinimumSize(d);
 		but_nextquestion.setMaximumSize(d);

@@ -18,6 +18,10 @@ public class Panel_GUI extends JFrame {
 		layout.show(pane, "Game");
 	}
 	
+	public void zeigHighscore() {
+		layout.show(pane, "Highscore");
+	}
+	
 	public Panel_GUI () {
 		pane = new Container();
 		layout = new CardLayout();
@@ -35,6 +39,9 @@ public class Panel_GUI extends JFrame {
     	Panel_game game = new Panel_game();
     	game.setLayout(new BoxLayout(game, BoxLayout.Y_AXIS));
     	pane.add("Game", game);
+    	
+    	Panel_highscore highscore = new Panel_highscore();
+    	highscore.setLayout(new BoxLayout(highscore, BoxLayout.Y_AXIS));
+    	pane.add("Highscore", highscore);
 	}
-
 }

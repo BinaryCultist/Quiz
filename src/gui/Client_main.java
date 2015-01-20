@@ -3,6 +3,7 @@ package gui;
 import java.io.*;
 import java.net.*;
 import server.*;
+
 import javax.swing.*;
 
 public class Client_main {
@@ -30,8 +31,7 @@ public class Client_main {
     		GUI.setSize(800, 600);
     		GUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     		GUI.setVisible(true);
-    		GUI.setResizable(false);	
-    		
+    		GUI.setResizable(false);    		
         	
             Object o;
             while (( o = ois.readObject()) != null) {
