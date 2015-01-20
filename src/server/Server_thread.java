@@ -21,7 +21,7 @@ public class Server_thread extends Thread {
             BufferedReader in = new BufferedReader(
                 new InputStreamReader(socket.getInputStream()));
         ) {
-        	
+        	System.out.println(in.readLine());        	
         	Questionlist ql = new Questionlist(); // Konstruktor für die Übergabe der Fragenliste
         	ql.fragenausdateilesen(); // Fragenliste wird erstellt
         	System.out.println("Fragen gelesen erfolgt");

@@ -15,7 +15,7 @@ public class Panel_GUI extends JFrame {
 	}
 	
 	public void zeigGame() {
-		layout.show(pane, "Game");
+		layout.show(pane, "Game");		
 	}
 	
 	public void zeigHighscore() {

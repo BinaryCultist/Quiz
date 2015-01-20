@@ -84,6 +84,5 @@ public class Button_Listener implements ActionListener {
 		if(event.getSource() == but_quit) {
 			System.exit(0);
 		}
-	}	
-
+	}
 }
