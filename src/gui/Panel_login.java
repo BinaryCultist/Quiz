@@ -2,21 +2,26 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 
-public class Panel_login extends JPanel {
+public class Panel_login extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
+	
+	private JButton but_login;
+	private JTextField username;
+	private JTextField password;
 	
 	public Panel_login() {
 		JLabel headline = new JLabel("Quiz KMI 13");
 		JLabel usernamelabel = new JLabel("Benutzername:");
-		JTextField username = new JTextField();
+		username = new JTextField();
 		JLabel passwordlabel = new JLabel("Passwort:");
-		JTextField password = new JTextField();
-		JButton but_login = new JButton("Login");
-		JButton but_newuser = new JButton("New User");
+		password = new JTextField();
+		but_login = new JButton("Login");
+		//JButton but_newuser = new JButton("New User");
 		
-		ActionListener aL = new Button_Listener(but_login, but_newuser);
+		//ActionListener aL = new Button_Listener(but_login, but_newuser);
 		
     	Dimension d = new Dimension(200,50);
 		Dimension t = new Dimension(150,25);
@@ -24,7 +29,7 @@ public class Panel_login extends JPanel {
 		Font font = new Font("Arial", Font.PLAIN, 18);
 		Font font2 = new Font("Arial", Font.PLAIN, 30);		
 
-    	setBackground(Color.GRAY);
+    	setBackground(Color.LIGHT_GRAY);
     	
     	add(Box.createVerticalStrut(20));		
 
@@ -77,11 +82,11 @@ public class Panel_login extends JPanel {
     	but_login.setMinimumSize(d);
     	but_login.setMaximumSize(d);
     	but_login.setPreferredSize(d);    	
-    	but_login.addActionListener(aL);
+    	but_login.addActionListener(this);
     	but_login.setAlignmentX(Component.CENTER_ALIGNMENT);
     	add(but_login);
     	  	
-    	add(Box.createVerticalStrut(20));
+    	/*add(Box.createVerticalStrut(20));
     	
 		but_newuser.setSize(d);
 		but_newuser.setMinimumSize(d);
@@ -89,6 +94,22 @@ public class Panel_login extends JPanel {
 		but_newuser.setPreferredSize(d);	
 		but_newuser.addActionListener(aL);
 		but_newuser.setAlignmentX(Component.CENTER_ALIGNMENT);
-    	add(but_newuser);    	
+    	add(but_newuser);   */ 	
 	}
+	
+	@Override
+	public void actionPerformed(ActionEvent event) {
+	
+		if(event.getSource() == but_login) {
+			/*String nutzer = username.getText();
+			String pw = password.getText();
+			if(Client_main.CheckLogin(nutzer, pw)){*/
+				Client_main.GUI.zeigMenu();
+			//} else {
+				// messagebox nix passiert
+			//}
+			
+		}
+	}
+	
 }

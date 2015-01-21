@@ -24,24 +24,17 @@ public class Panel_game extends JPanel implements ActionListener {
 	public Panel_game() {
 		
 		aktuellefrage = Client_main.Allefragen.get(0);
-		//String Antwort1 = "Ant 1";
-		//String Antwort2 = "Ant 2";
-		//String Antwort3 = "Ant 3";
-		//String Antwort4 = "Ant 4";
 		but_antwort1 = new JButton("<html><div style='max-width:180px;'>"+aktuellefrage.Antwort1+"</div></html>");
 		but_antwort2 = new JButton("<html><div style='max-width:180px;'>"+aktuellefrage.Antwort2+"</div></html>");
 		but_antwort3 = new JButton("<html><div style='max-width:180px;'>"+aktuellefrage.Antwort3+"</div></html>");
 		but_antwort4 = new JButton("<html><div style='max-width:180px;'>"+aktuellefrage.Antwort4+"</div></html>");
 		but_nextquestion = new JButton("Nächste Frage");
-    	//String text = "Das ist eine lange Frage1 und hier noch eine lange Frage2!";    	
     	Border border = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
     	
-		//ActionListener aL = new Button_Listener(but_antwort1, but_antwort2, but_antwort3, but_antwort4, but_nextquestion);
-		
-    	setBackground(Color.BLUE);    	
+    	setBackground(Color.LIGHT_GRAY);
     	
     	Dimension d2 = new Dimension(200,50);
-    	Dimension d = new Dimension(200,60);
+    	Dimension d = new Dimension(300,60);
 		Dimension t3 = new Dimension(400,100);
 		Font font = new Font("Arial", Font.PLAIN, 18);
     	
@@ -58,6 +51,7 @@ public class Panel_game extends JPanel implements ActionListener {
     	fragenfeld.setPreferredSize(t3);
     	fragenfeld.setEditable(false);
     	fragenfeld.setLineWrap(true);
+    	fragenfeld.setWrapStyleWord(true);
     	add(fragenfeld);
     	
 		add(Box.createVerticalStrut(60));
@@ -65,9 +59,10 @@ public class Panel_game extends JPanel implements ActionListener {
 		// Antwortknopf 1 und 2
 		
 		JPanel buttonPanel1 = new JPanel();
+		buttonPanel1.setBackground(Color.LIGHT_GRAY);
 		buttonPanel1.setLayout(new BoxLayout(buttonPanel1, BoxLayout.LINE_AXIS));
 		
-		buttonPanel1.add(Box.createRigidArea(new Dimension(100, 0)));
+		buttonPanel1.add(Box.createRigidArea(new Dimension(50, 0)));
 		//buttonPanel1.add(Box.createHorizontalGlue());
 		
     	but_antwort1.setSize(d);
@@ -76,6 +71,7 @@ public class Panel_game extends JPanel implements ActionListener {
     	but_antwort1.setPreferredSize(d);    	
     	but_antwort1.addActionListener(this);
     	but_antwort1.setAlignmentX(Component.CENTER_ALIGNMENT);
+    	but_antwort1.setBackground(Color.WHITE);
     	buttonPanel1.add(but_antwort1);
     	
     	buttonPanel1.add(Box.createHorizontalGlue());
@@ -86,6 +82,7 @@ public class Panel_game extends JPanel implements ActionListener {
     	but_antwort2.setPreferredSize(d);    	
     	but_antwort2.addActionListener(this);
     	but_antwort2.setAlignmentX(Component.CENTER_ALIGNMENT);
+    	but_antwort2.setBackground(Color.WHITE);
     	buttonPanel1.add(but_antwort2);
     	
 		buttonPanel1.add(Box.createRigidArea(new Dimension(50, 0)));
@@ -97,6 +94,7 @@ public class Panel_game extends JPanel implements ActionListener {
 		
 		JPanel buttonPanel2 = new JPanel();
 		buttonPanel2.setLayout(new BoxLayout(buttonPanel2, BoxLayout.LINE_AXIS));
+		buttonPanel2.setBackground(Color.LIGHT_GRAY);
 		
 		buttonPanel2.add(Box.createRigidArea(new Dimension(50, 0)));
 		
@@ -106,6 +104,7 @@ public class Panel_game extends JPanel implements ActionListener {
     	but_antwort3.setPreferredSize(d);    	
     	but_antwort3.addActionListener(this);
     	but_antwort3.setAlignmentX(Component.CENTER_ALIGNMENT);
+    	but_antwort3.setBackground(Color.WHITE);
     	buttonPanel2.add(but_antwort3);
     	
     	buttonPanel2.add(Box.createHorizontalGlue());
@@ -116,6 +115,7 @@ public class Panel_game extends JPanel implements ActionListener {
     	but_antwort4.setPreferredSize(d);    	
     	but_antwort4.addActionListener(this);
     	but_antwort4.setAlignmentX(Component.CENTER_ALIGNMENT);
+    	but_antwort4.setBackground(Color.WHITE);
     	buttonPanel2.add(but_antwort4);
     	
 		buttonPanel2.add(Box.createRigidArea(new Dimension(50, 0)));
@@ -126,6 +126,7 @@ public class Panel_game extends JPanel implements ActionListener {
 		// Nächste-Frage-Knopf
 		
 		JPanel buttonPanel3 = new JPanel();
+		buttonPanel3.setBackground(Color.LIGHT_GRAY);
 		buttonPanel3.setLayout(new BoxLayout(buttonPanel3, BoxLayout.LINE_AXIS));		
 
     	buttonPanel3.add(Box.createHorizontalGlue());
@@ -136,10 +137,11 @@ public class Panel_game extends JPanel implements ActionListener {
 		but_nextquestion.setPreferredSize(d2);    	
 		but_nextquestion.addActionListener(this);
 		but_nextquestion.setAlignmentX(Component.CENTER_ALIGNMENT);
+		but_nextquestion.setBackground(Color.WHITE);
 		but_nextquestion.setVisible(false);
     	buttonPanel3.add(but_nextquestion);
     	
-		buttonPanel3.add(Box.createRigidArea(new Dimension(100, 0)));
+		buttonPanel3.add(Box.createRigidArea(new Dimension(50, 0)));
     	
     	add(buttonPanel3);
     	
@@ -230,15 +232,19 @@ public class Panel_game extends JPanel implements ActionListener {
 				return;
 			}
 			aktuellerindex++;
-			aktuellefrage = Client_main.Allefragen.get(aktuellerindex);
-			but_antwort1.setOpaque(false);
-			but_antwort2.setOpaque(false);
-			but_antwort3.setOpaque(false);
-			but_antwort4.setOpaque(false);
+			aktuellefrage = Client_main.Allefragen.get(aktuellerindex);			
 			but_antwort1.setEnabled(true);
 			but_antwort2.setEnabled(true);
 			but_antwort3.setEnabled(true);
 			but_antwort4.setEnabled(true);
+			but_antwort1.setOpaque(true);
+			but_antwort2.setOpaque(true);
+			but_antwort3.setOpaque(true);
+			but_antwort4.setOpaque(true);
+			but_antwort1.setBackground(Color.WHITE);
+			but_antwort2.setBackground(Color.WHITE);
+			but_antwort3.setBackground(Color.WHITE);
+			but_antwort4.setBackground(Color.WHITE);
 			fragenfeld.setText(aktuellefrage.Frage);			
 			but_antwort1.setText("<html><div style='max-width:180px;'>"+aktuellefrage.Antwort1+"</div></html>");
 			but_antwort2.setText("<html><div style='max-width:180px;'>"+aktuellefrage.Antwort2+"</div></html>");

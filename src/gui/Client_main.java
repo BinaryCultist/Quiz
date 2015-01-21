@@ -4,13 +4,21 @@ import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 
-import server.*;
+import server.Frage;
 
 import javax.swing.*;
 
 public class Client_main {
 	
 	public static Panel_GUI GUI;
+	//private static PrintWriter out;
+	
+	/*public static Boolean CheckLogin (String nutzer, String pw) {
+		out.println("Login");
+		out.println("Nutzer");
+		out.println("pw");
+		return true;
+	} */
 	
 	public static ArrayList<Frage> Allefragen = new ArrayList<Frage>();
 	
@@ -19,17 +27,18 @@ public class Client_main {
         String hostName = "127.0.0.1"; // Server läuft auf Localhost, ansonsten Server-IP
         int portNumber = 4444; // Verbindungs-Port auf dem Server
 
-        try (
-            Socket serversocket = new Socket(hostName, portNumber); // Öffnen eines Sockets zum Server
-            PrintWriter out = new PrintWriter(serversocket.getOutputStream(), true);
-        		
-        	InputStream is = serversocket.getInputStream();
-        	ObjectInputStream ois = new ObjectInputStream(is);        		
-        		
-            BufferedReader in = new BufferedReader(new InputStreamReader(serversocket.getInputStream()));
-        	BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
+        try (        		
+        		Socket serversocket = new Socket(hostName, portNumber); // Öffnen eines Sockets zum Server
+        		InputStream is = serversocket.getInputStream();
+            	ObjectInputStream ois = new ObjectInputStream(is);
         ) {
-        	out.println("Hallo Server");
+        	//out = new PrintWriter(serversocket.getOutputStream(), true);
+    		
+        	
+        	//BufferedReader in = new BufferedReader(new InputStreamReader(serversocket.getInputStream()));
+        	BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
+        	
+        	//out.println("Fragen");
             Object o;
             while (( o = ois.readObject()) != null) {
             	if (o instanceof Object[]) {
@@ -41,7 +50,7 @@ public class Client_main {
             			i++;
             			System.out.println("Frage " + i + ": " + frage.Frage + " Antwort 1: " + frage.Antwort1 + 
 						" Antwort 2: " + frage.Antwort2 + " Antwort 3: " + frage.Antwort3 + 
-						" Antwort 4: " + frage.Antwort4 + " Richtige Antwort: " + frage.RichtigeAntwort);				
+						" Antwort 4: " + frage.Antwort4 + " Richtige Antwort: " + frage.RichtigeAntwort);		
 					}
             		GUI = new Panel_GUI();
             		GUI.setTitle("Quiz");

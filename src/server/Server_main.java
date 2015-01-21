@@ -11,8 +11,8 @@ public class Server_main {
         
         try (ServerSocket serversocket = new ServerSocket(portNumber)) { 
             while (listening) {
-            	System.out.println("Neuer Server Thread aufgemacht.");
-	            new Server_thread(serversocket.accept()).start();	            
+	            new Server_thread(serversocket.accept()).start();
+	            System.out.println("Neuer Server Thread aufgemacht.");
 	        }
 	    } catch (IOException e) {
             System.err.println("Fehler mit Port " + portNumber);

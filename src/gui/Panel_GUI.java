@@ -15,12 +15,17 @@ public class Panel_GUI extends JFrame {
 	}
 	
 	public void zeigGame() {
-		layout.show(pane, "Game");		
+		panel_game = new Panel_game();
+		panel_game.setLayout(new BoxLayout(panel_game, BoxLayout.Y_AXIS));
+    	pane.add("Game", panel_game);
+		layout.show(pane, "Game");	
 	}
 	
 	public void zeigHighscore() {
 		layout.show(pane, "Highscore");
 	}
+	
+	private Panel_game panel_game;
 	
 	public Panel_GUI () {
 		pane = new Container();
@@ -34,11 +39,7 @@ public class Panel_GUI extends JFrame {
 		
     	Panel_menu menu = new Panel_menu();
     	menu.setLayout(new BoxLayout(menu, BoxLayout.Y_AXIS));
-    	pane.add("Menu", menu);
-    	
-    	Panel_game game = new Panel_game();
-    	game.setLayout(new BoxLayout(game, BoxLayout.Y_AXIS));
-    	pane.add("Game", game);
+    	pane.add("Menu", menu);    	
     	
     	Panel_highscore highscore = new Panel_highscore();
     	highscore.setLayout(new BoxLayout(highscore, BoxLayout.Y_AXIS));
