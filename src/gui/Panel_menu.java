@@ -55,6 +55,7 @@ public class Panel_menu extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource() == but_newgame) {
+			
 			Client_main.GUI.zeigGame();
 		}
 		

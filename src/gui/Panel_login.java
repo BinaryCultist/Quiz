@@ -101,14 +101,14 @@ public class Panel_login extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 	
 		if(event.getSource() == but_login) {
-			/*String nutzer = username.getText();
-			String pw = password.getText();
-			if(Client_main.CheckLogin(nutzer, pw)){*/
-				Client_main.GUI.zeigMenu();
-			//} else {
-				// messagebox nix passiert
-			//}
 			
+				Boolean isLoginOK = Client_main.Login(username.getText(), password.getText());
+				if (isLoginOK) {
+					Client_main.AktNutzername = username.getText();
+					Client_main.GUI.zeigMenu();
+				} else {
+					JOptionPane.showMessageDialog(null, "Nutzername und/oder Passwort ist ungültig!");
+				}			
 		}
 	}
 	

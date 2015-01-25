@@ -5,19 +5,46 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import server.Highscore_eintrag;
+
 public class Panel_highscore extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
+	private JTextArea HighscoreFeld;
 	
 	private JButton but_menu;
+	public void showHighscore () {
+		HighscoreFeld.setText("");
+		
+		for (Highscore_eintrag e : Client_main.Highscore) {
+			HighscoreFeld.append(e.Nutzername + ": " + e.Punkte.toString() + " Punkte\n");
+			System.out.println(e.Nutzername + ": " + e.Punkte.toString() + " Punkte\n");
+		}
+	}
 	
 	public Panel_highscore() {
 		but_menu = new JButton("Menu");
-		
+		Font font = new Font("Arial", Font.PLAIN, 18);
+		Dimension t = new Dimension(400,300);
 		Dimension d = new Dimension(200,50);
-		
 		setBackground(Color.LIGHT_GRAY);
 		
-		add(Box.createVerticalStrut(400));
+		add(Box.createVerticalStrut(20));
+		
+		HighscoreFeld = new JTextArea("", 10, 20);
+		HighscoreFeld.setFont(font);
+		HighscoreFeld.setAlignmentX(Component.CENTER_ALIGNMENT);
+		HighscoreFeld.setOpaque(true);
+		//HighscoreFeld.setBorder(border);
+		HighscoreFeld.setBackground(Color.WHITE);
+		HighscoreFeld.setMaximumSize(t);
+		HighscoreFeld.setMinimumSize(t);
+		HighscoreFeld.setPreferredSize(t);
+		HighscoreFeld.setEditable(false);
+		HighscoreFeld.setLineWrap(true);
+		HighscoreFeld.setWrapStyleWord(true);
+    	add(HighscoreFeld);		
+		
+		add(Box.createVerticalStrut(50));
 		
 		but_menu.setSize(d);
 		but_menu.setMinimumSize(d);

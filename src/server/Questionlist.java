@@ -68,7 +68,7 @@ public class Questionlist {
 			return fragentemp; // Rückgabe 10 Zufallsfragen pro csv-Datei
 		}
 	
-	public Object[] allefragen() { 
+	public ArrayList<Frage> allefragen() { 
 		ArrayList<Frage> fragentemp = new ArrayList<Frage>(); // Konstruktor für alle 50 Zufalls-Fragen
 		fragen1 = randomzehn (fragen1); // Zufallsfragen holen
 		fragen2 = randomzehn (fragen2);
@@ -80,6 +80,6 @@ public class Questionlist {
 		fragentemp.addAll(fragen3);
 		fragentemp.addAll(fragen4);
 		fragentemp.addAll(fragen5);		
-		return fragentemp.toArray(); // Rückgabe von 50 Zufalls-Fragen (je 10 aus 1 Kategorie)
+		return fragentemp; // Rückgabe von 50 Zufalls-Fragen (je 10 aus 1 Kategorie)
 	}
 }

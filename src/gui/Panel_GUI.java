@@ -9,6 +9,8 @@ public class Panel_GUI extends JFrame {
 	private Container pane;
 	
 	private static final long serialVersionUID = 1L;
+	private Panel_game panel_game;
+	private Panel_highscore panel_highscore;
 	
 	public void zeigMenu() {
 		layout.show(pane, "Menu");
@@ -17,15 +19,17 @@ public class Panel_GUI extends JFrame {
 	public void zeigGame() {
 		panel_game = new Panel_game();
 		panel_game.setLayout(new BoxLayout(panel_game, BoxLayout.Y_AXIS));
+		Client_main.HolFragen();
+		panel_game.InitGame();
     	pane.add("Game", panel_game);
-		layout.show(pane, "Game");	
+		layout.show(pane, "Game");
 	}
 	
 	public void zeigHighscore() {
-		layout.show(pane, "Highscore");
-	}
-	
-	private Panel_game panel_game;
+		Client_main.Highscore_laden();
+		panel_highscore.showHighscore();
+		layout.show(pane, "Highscore");		
+	}	
 	
 	public Panel_GUI () {
 		pane = new Container();
@@ -41,8 +45,8 @@ public class Panel_GUI extends JFrame {
     	menu.setLayout(new BoxLayout(menu, BoxLayout.Y_AXIS));
     	pane.add("Menu", menu);    	
     	
-    	Panel_highscore highscore = new Panel_highscore();
-    	highscore.setLayout(new BoxLayout(highscore, BoxLayout.Y_AXIS));
-    	pane.add("Highscore", highscore);
+    	panel_highscore = new Panel_highscore();
+    	panel_highscore.setLayout(new BoxLayout(panel_highscore, BoxLayout.Y_AXIS));
+    	pane.add("Highscore", panel_highscore);
 	}
 }
