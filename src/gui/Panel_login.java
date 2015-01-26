@@ -2,26 +2,26 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
 
+import functions.JTextfieldLimit;
+
 public class Panel_login extends JPanel implements ActionListener {
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 1L;	
 	private JButton but_login;
 	private JTextField username;
-	private JTextField password;
+	private JPasswordField password;
 	
 	public Panel_login() {
 		JLabel headline = new JLabel("Quiz KMI 13");
 		JLabel usernamelabel = new JLabel("Benutzername:");
 		username = new JTextField();
 		JLabel passwordlabel = new JLabel("Passwort:");
-		password = new JTextField();
+		password = new JPasswordField();
 		but_login = new JButton("Login");
-		//JButton but_newuser = new JButton("New User");
 		
-		//ActionListener aL = new Button_Listener(but_login, but_newuser);
+		JTextfieldLimit jfl = new JTextfieldLimit(8);
+		JTextfieldLimit jfl2 = new JTextfieldLimit(8);
 		
     	Dimension d = new Dimension(200,50);
 		Dimension t = new Dimension(150,25);
@@ -57,6 +57,7 @@ public class Panel_login extends JPanel implements ActionListener {
 		username.setFont(font);
 		username.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(username);
+		username.setDocument(jfl);
 		
 		add(Box.createVerticalStrut(20));
 		
@@ -74,7 +75,9 @@ public class Panel_login extends JPanel implements ActionListener {
 		password.setPreferredSize(t);
 		password.setFont(font);
 		password.setAlignmentX(Component.CENTER_ALIGNMENT);
+		password.setEchoChar('*');
 		add(password);
+		password.setDocument(jfl2);
 		
 		add(Box.createVerticalStrut(20));
 		
@@ -85,31 +88,20 @@ public class Panel_login extends JPanel implements ActionListener {
     	but_login.addActionListener(this);
     	but_login.setAlignmentX(Component.CENTER_ALIGNMENT);
     	add(but_login);
-    	  	
-    	/*add(Box.createVerticalStrut(20));
-    	
-		but_newuser.setSize(d);
-		but_newuser.setMinimumSize(d);
-		but_newuser.setMaximumSize(d);
-		but_newuser.setPreferredSize(d);	
-		but_newuser.addActionListener(aL);
-		but_newuser.setAlignmentX(Component.CENTER_ALIGNMENT);
-    	add(but_newuser);   */ 	
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent event) {
-	
-		if(event.getSource() == but_login) {
+	public void actionPerformed(ActionEvent event) {	
+		if(event.getSource() == but_login) {			
+			String passString = new String(password.getPassword());
 			
-				Boolean isLoginOK = Main.Login(username.getText(), password.getText());
-				if (isLoginOK) {
-					Main.AktNutzername = username.getText();
-					Main.GUI.zeigMenu();
-				} else {
-					JOptionPane.showMessageDialog(null, "Nutzername und/oder Passwort ist ungültig!");
-				}			
+			Boolean isLoginOK = Main.Login(username.getText(), passString);
+			if (isLoginOK) {
+				Main.AktNutzername = username.getText();
+				Main.GUI.zeigMenu();
+			} else {
+				JOptionPane.showMessageDialog(null, "Nutzername und/oder Passwort ist ungültig!");
+			}			
 		}
-	}
-	
+	}	
 }

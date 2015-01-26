@@ -1,6 +1,6 @@
 package functions;
 
-public class Frage implements java.io.Serializable { // Klasse Frage wird implementiert
+public class Frage implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	public String Frage;
 	public String Antwort1;

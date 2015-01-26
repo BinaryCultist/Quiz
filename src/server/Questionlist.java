@@ -9,7 +9,6 @@ import java.security.CodeSource;
 import functions.Frage;
 
 public class Questionlist {
-
 	private ArrayList<Frage> fragen1 = new ArrayList<Frage>(); // Konstruktor für Arrayliste der Fragen Kategorie 1
 	private ArrayList<Frage> fragen2 = new ArrayList<Frage>();
 	private ArrayList<Frage> fragen3 = new ArrayList<Frage>();
@@ -17,10 +16,10 @@ public class Questionlist {
 	private ArrayList<Frage> fragen5 = new ArrayList<Frage>();
 	private String jarDir;
 	
-	public void fragenausdateilesen() {
-		
+	public void fragenausdateilesen() {		
     	CodeSource codeSource = Main.class.getProtectionDomain().getCodeSource();
     	File jarFile;
+    	
 		try {
 			jarFile = new File(codeSource.getLocation().toURI().getPath());
 			jarDir = jarFile.getParentFile().getPath();
@@ -36,7 +35,7 @@ public class Questionlist {
 		fragen5 = fragenausdateilesen_intern(jarDir +"/kategorie5.csv");
 	}
 	
-	  public ArrayList<Frage> fragenausdateilesen_intern(String dateiname) {
+	public ArrayList<Frage> fragenausdateilesen_intern(String dateiname) {		
 		String csvFile = dateiname;
 		ArrayList<Frage> fragentemp = new ArrayList<Frage>(); // Konstruktor temp-ArrayList
 		BufferedReader br = null;
@@ -46,7 +45,7 @@ public class Questionlist {
 		try {	 
 			br = new BufferedReader(new FileReader(csvFile)); // Einlesen der CSV-Datei
 			while ((line = br.readLine()) != null) { // Schleife um Zeile für Zeile einzulesen bis Dateiende 
-				Frage f = new Frage(); // Konstruktor für ein Array (Frage + dazugehörigen Antworten + richtige Antwort)
+				Frage f = new Frage();
 				String [] element = line.split(cvsSplitBy);
 				f.Frage = element[0]; // Abspeichern in Array
 				f.Antwort1 = element[1];
@@ -54,7 +53,7 @@ public class Questionlist {
 				f.Antwort3 = element[3];
 				f.Antwort4 = element[4];
 				f.RichtigeAntwort = Integer.parseInt(element[5]);		
-				fragentemp.add(f); // zur temp-ArrayList hinzufügen		
+				fragentemp.add(f);
 			}
 	 
 		} catch (FileNotFoundException e) {
@@ -70,23 +69,21 @@ public class Questionlist {
 				}
 			}
 		}
-	 
-		// System.out.println("Done");
 		return fragentemp;
-	  }
+	}	
 	  
-		private ArrayList<Frage> randomzehn(ArrayList<Frage> fragen) { // Fragen random verteilen und 10 pro Kategorie auswählen
-			ArrayList<Frage> fragentemp = new ArrayList<Frage>();
-			Random r = new Random();
-			for (int i = 0; i < 10; i++) { // für 10 Fragen
-				fragentemp.add(fragen.get(r.nextInt(fragen.size() - 1))); // Random-Fragenarray hinzufügen
-			}
-			return fragentemp; // Rückgabe 10 Zufallsfragen pro csv-Datei
+	private ArrayList<Frage> randomzehn(ArrayList<Frage> fragen) { // Fragen random verteilen und 10 pro Kategorie auswählen
+		ArrayList<Frage> fragentemp = new ArrayList<Frage>();
+		Random r = new Random();
+		for (int i = 0; i < 10; i++) { // für 10 Fragen
+			fragentemp.add(fragen.get(r.nextInt(fragen.size() - 1))); // Random-Fragenarray hinzufügen
 		}
+		return fragentemp; // Rückgabe 10 Zufallsfragen
+	}
 	
 	public ArrayList<Frage> allefragen() { 
 		ArrayList<Frage> fragentemp = new ArrayList<Frage>(); // Konstruktor für alle 50 Zufalls-Fragen
-		fragen1 = randomzehn (fragen1); // Zufallsfragen holen
+		fragen1 = randomzehn (fragen1); // Zufallsfragen holen (je 10)
 		fragen2 = randomzehn (fragen2);
 		fragen3 = randomzehn (fragen3);
 		fragen4 = randomzehn (fragen4);

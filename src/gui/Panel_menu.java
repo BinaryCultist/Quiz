@@ -2,12 +2,10 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
 
 public class Panel_menu extends JPanel implements ActionListener {
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 1L;	
 	private JButton but_newgame;
 	private JButton but_highscore;
 	private JButton but_quit;
@@ -54,8 +52,7 @@ public class Panel_menu extends JPanel implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		if(event.getSource() == but_newgame) {
-			
+		if(event.getSource() == but_newgame) {			
 			Main.GUI.zeigGame();
 		}
 		
@@ -65,7 +62,6 @@ public class Panel_menu extends JPanel implements ActionListener {
 		
 		if(event.getSource() == but_quit) {
 			System.exit(0);
-		}
-		
+		}		
 	}
 }

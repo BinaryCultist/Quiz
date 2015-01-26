@@ -4,11 +4,9 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Panel_GUI extends JFrame {
-	
+	private static final long serialVersionUID = 1L;
 	private CardLayout layout;
 	private Container pane;
-	
-	private static final long serialVersionUID = 1L;
 	private Panel_game panel_game;
 	private Panel_highscore panel_highscore;
 	

@@ -2,17 +2,15 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
 
 import functions.Highscore_eintrag;
 
-
 public class Panel_highscore extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
-	private JTextArea HighscoreFeld;
-	
+	private JTextArea HighscoreFeld;	
 	private JButton but_menu;
+	
 	public void showHighscore () {
 		HighscoreFeld.setText("");
 		
@@ -27,6 +25,7 @@ public class Panel_highscore extends JPanel implements ActionListener {
 		Font font = new Font("Arial", Font.PLAIN, 18);
 		Dimension t = new Dimension(400,300);
 		Dimension d = new Dimension(200,50);
+		
 		setBackground(Color.LIGHT_GRAY);
 		
 		add(Box.createVerticalStrut(20));
@@ -35,7 +34,6 @@ public class Panel_highscore extends JPanel implements ActionListener {
 		HighscoreFeld.setFont(font);
 		HighscoreFeld.setAlignmentX(Component.CENTER_ALIGNMENT);
 		HighscoreFeld.setOpaque(true);
-		//HighscoreFeld.setBorder(border);
 		HighscoreFeld.setBackground(Color.WHITE);
 		HighscoreFeld.setMaximumSize(t);
 		HighscoreFeld.setMinimumSize(t);
@@ -53,8 +51,7 @@ public class Panel_highscore extends JPanel implements ActionListener {
 		but_menu.setPreferredSize(d);    	
 		but_menu.addActionListener(this);
 		but_menu.setAlignmentX(Component.CENTER_ALIGNMENT);
-		add(but_menu);
-		
+		add(but_menu);		
 	}
 	
 	@Override

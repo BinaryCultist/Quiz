@@ -2,7 +2,6 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
@@ -11,7 +10,7 @@ import functions.Frage;
 import functions.Highscore_eintrag;
 
 
-public class Panel_game extends JPanel implements ActionListener {
+public class Panel_game extends JPanel implements ActionListener {	
 	private static final long serialVersionUID = 1L;
 	private Frage aktuellefrage;
 	private int aktuellerindex = 0;
@@ -31,8 +30,6 @@ public class Panel_game extends JPanel implements ActionListener {
 	}
 	
 	public Panel_game() {
-		
-
 		but_antwort1 = new JButton();
 		but_antwort2 = new JButton();
 		but_antwort3 = new JButton();
@@ -40,11 +37,11 @@ public class Panel_game extends JPanel implements ActionListener {
 		but_nextquestion = new JButton("Nächste Frage");
     	Border border = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
     	
-    	setBackground(Color.LIGHT_GRAY);
+    	setBackground(Color.LIGHT_GRAY);    	
     	
-    	Dimension d2 = new Dimension(200,50);
     	Dimension d = new Dimension(300,60);
-		Dimension t3 = new Dimension(400,100);
+    	Dimension d2 = new Dimension(200,50);
+		Dimension t = new Dimension(400,100);
 		Font font = new Font("Arial", Font.PLAIN, 18);
     	
 		add(Box.createVerticalStrut(20));    	
@@ -55,9 +52,9 @@ public class Panel_game extends JPanel implements ActionListener {
     	fragenfeld.setOpaque(true);
     	fragenfeld.setBorder(border);
     	fragenfeld.setBackground(Color.WHITE);
-    	fragenfeld.setMaximumSize(t3);
-    	fragenfeld.setMinimumSize(t3);
-    	fragenfeld.setPreferredSize(t3);
+    	fragenfeld.setMaximumSize(t);
+    	fragenfeld.setMinimumSize(t);
+    	fragenfeld.setPreferredSize(t);
     	fragenfeld.setEditable(false);
     	fragenfeld.setLineWrap(true);
     	fragenfeld.setWrapStyleWord(true);
@@ -232,7 +229,7 @@ public class Panel_game extends JPanel implements ActionListener {
 		}
 		
 		if(event.getSource() == but_nextquestion) {
-			if(aktuellerindex == 9) {
+			if(aktuellerindex == 49) {
 				System.out.println("Richtige Antworten: " + punkte);
 				Highscore_eintrag neuerEintrag = new Highscore_eintrag();
 				neuerEintrag.Nutzername = Main.AktNutzername;

@@ -8,8 +8,7 @@ public class Highscore_eintrag implements java.io.Serializable, Comparable<Highs
 		public Integer Punkte;		
 
 		@Override
-		public int compareTo(Highscore_eintrag e) {
-			
+		public int compareTo(Highscore_eintrag e) {			
 			return e.Punkte.compareTo(this.Punkte);
 		}
 }
