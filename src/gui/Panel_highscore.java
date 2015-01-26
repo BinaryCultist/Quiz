@@ -5,7 +5,8 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-import server.Highscore_eintrag;
+import functions.Highscore_eintrag;
+
 
 public class Panel_highscore extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -15,7 +16,7 @@ public class Panel_highscore extends JPanel implements ActionListener {
 	public void showHighscore () {
 		HighscoreFeld.setText("");
 		
-		for (Highscore_eintrag e : Client_main.Highscore) {
+		for (Highscore_eintrag e : Main.Highscore) {
 			HighscoreFeld.append(e.Nutzername + ": " + e.Punkte.toString() + " Punkte\n");
 			System.out.println(e.Nutzername + ": " + e.Punkte.toString() + " Punkte\n");
 		}
@@ -59,7 +60,7 @@ public class Panel_highscore extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource() == but_menu) {
-			Client_main.GUI.zeigMenu();
+			Main.GUI.zeigMenu();
 		}		
 	}
 }

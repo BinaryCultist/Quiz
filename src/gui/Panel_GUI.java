@@ -19,14 +19,14 @@ public class Panel_GUI extends JFrame {
 	public void zeigGame() {
 		panel_game = new Panel_game();
 		panel_game.setLayout(new BoxLayout(panel_game, BoxLayout.Y_AXIS));
-		Client_main.HolFragen();
+		Main.HolFragen();
 		panel_game.InitGame();
     	pane.add("Game", panel_game);
 		layout.show(pane, "Game");
 	}
 	
 	public void zeigHighscore() {
-		Client_main.Highscore_laden();
+		Main.Highscore_laden();
 		panel_highscore.showHighscore();
 		layout.show(pane, "Highscore");		
 	}	

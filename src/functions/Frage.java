@@ -1,4 +1,4 @@
-package server;
+package functions;
 
 public class Frage implements java.io.Serializable { // Klasse Frage wird implementiert
 	private static final long serialVersionUID = 1L;

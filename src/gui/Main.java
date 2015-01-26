@@ -3,18 +3,18 @@ package gui;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
-import server.Frage;
-import server.Highscore_eintrag;
-import server.Server_befehl;
-
 import javax.swing.*;
 
-public class Client_main {
+import functions.Befehle;
+import functions.Frage;
+import functions.Highscore_eintrag;
+
+public class Main {
 	
 	private static Socket serversocket;
 	private static ObjectInputStream in;
 	private static ObjectOutputStream out;
-	private static BufferedReader stdIn;
+	//private static BufferedReader stdIn;
 	private static String hostName;
 	private static int portNumber;
 	
@@ -31,7 +31,7 @@ public class Client_main {
         //try (        		
         serversocket = new Socket(hostName, portNumber); // Öffnen eines Sockets zum Server
         out = new ObjectOutputStream(serversocket.getOutputStream());
-        stdIn = new BufferedReader(new InputStreamReader(System.in));
+        //stdIn = new BufferedReader(new InputStreamReader(System.in));
         in = new ObjectInputStream(serversocket.getInputStream());
         
         //InputStream is = serversocket.getInputStream();          
@@ -63,6 +63,10 @@ public class Client_main {
             		GUI.setVisible(true);
             		GUI.setResizable(false);
             		
+            		
+            		
+            		
+            		
             	
 
             	//stdIn.readLine();
@@ -82,10 +86,10 @@ public class Client_main {
         }
     
     public static Boolean Login(String user, String pass) {
-    	System.out.println("Login... User: " + user + ", Passwort: " + pass);
+    	System.out.println("Login... User: " + user + ", Passwort: " + pass);		
     	
         try {
-        	out.writeObject(Server_befehl.Login);
+        	out.writeObject(Befehle.Login);
         	out.writeObject(user);
         	out.writeObject(pass);
 			Boolean isOk = (Boolean)in.readObject();
@@ -99,9 +103,10 @@ public class Client_main {
         return false;
     }
     
-    public static ArrayList<Frage> HolFragen() {
+    @SuppressWarnings("unchecked")
+	public static ArrayList<Frage> HolFragen() {
     	try {
-        	out.writeObject(Server_befehl.Fragenholen);
+        	out.writeObject(Befehle.Fragenholen);
         	ArrayList<Frage> fragen = (ArrayList<Frage>)in.readObject();
         	Allefragen = fragen;
 			return fragen;	
@@ -112,12 +117,14 @@ public class Client_main {
 		}
         return null;
     }
-    
+ 	
+
+
     public static void Highscore_speichern(Highscore_eintrag eintrag) {
     	//System.out.println("Login... User: " + user + ", Passwort: " + pass);
     	
         try {
-        	out.writeObject(Server_befehl.Highscore_speichern);
+        	out.writeObject(Befehle.Highscore_speichern);
         	out.writeObject(eintrag);			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -126,8 +133,9 @@ public class Client_main {
     
     public static ArrayList<Highscore_eintrag> Highscore_laden() {
     	try {
-        	out.writeObject(Server_befehl.Highscore_laden);
-        	ArrayList<Highscore_eintrag> highscore = (ArrayList<Highscore_eintrag>)in.readObject();
+        	out.writeObject(Befehle.Highscore_laden);
+        	@SuppressWarnings("unchecked")
+			ArrayList<Highscore_eintrag> highscore = (ArrayList<Highscore_eintrag>)in.readObject();
         	Highscore = highscore;
         	for (Highscore_eintrag e : highscore) {
     			//HighscoreFeld.append(e.Nutzername + ": " + e.Punkte.toString() + " Punkte\n");

@@ -1,8 +1,12 @@
 package server;
 
 import java.io.*;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.security.CodeSource;
+
+import functions.Frage;
 
 public class Questionlist {
 
@@ -11,13 +15,25 @@ public class Questionlist {
 	private ArrayList<Frage> fragen3 = new ArrayList<Frage>();
 	private ArrayList<Frage> fragen4 = new ArrayList<Frage>();
 	private ArrayList<Frage> fragen5 = new ArrayList<Frage>();
+	private String jarDir;
 	
 	public void fragenausdateilesen() {
-		fragen1 = fragenausdateilesen_intern("/home/daedalus/workspace/Quiz/src/server/fragen1.csv"); // Auslesen der Fragen aus CSV-Datei
-		fragen2 = fragenausdateilesen_intern("/home/daedalus/workspace/Quiz/src/server/fragen2.csv");
-		fragen3 = fragenausdateilesen_intern("/home/daedalus/workspace/Quiz/src/server/fragen3.csv");
-		fragen4 = fragenausdateilesen_intern("/home/daedalus/workspace/Quiz/src/server/fragen4.csv");
-		fragen5 = fragenausdateilesen_intern("/home/daedalus/workspace/Quiz/src/server/fragen5.csv");
+		
+    	CodeSource codeSource = Main.class.getProtectionDomain().getCodeSource();
+    	File jarFile;
+		try {
+			jarFile = new File(codeSource.getLocation().toURI().getPath());
+			jarDir = jarFile.getParentFile().getPath();
+			System.out.println(jarDir);
+		} catch (URISyntaxException e1) {
+			e1.printStackTrace();
+		}		
+		
+		fragen1 = fragenausdateilesen_intern(jarDir +"/kategorie1.csv"); // Auslesen der Fragen aus CSV-Datei
+		fragen2 = fragenausdateilesen_intern(jarDir +"/kategorie2.csv");
+		fragen3 = fragenausdateilesen_intern(jarDir +"/kategorie3.csv");
+		fragen4 = fragenausdateilesen_intern(jarDir +"/kategorie4.csv");
+		fragen5 = fragenausdateilesen_intern(jarDir +"/kategorie5.csv");
 	}
 	
 	  public ArrayList<Frage> fragenausdateilesen_intern(String dateiname) {

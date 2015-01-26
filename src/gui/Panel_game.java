@@ -7,8 +7,9 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 
-import server.Frage;
-import server.Highscore_eintrag;
+import functions.Frage;
+import functions.Highscore_eintrag;
+
 
 public class Panel_game extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -25,7 +26,7 @@ public class Panel_game extends JPanel implements ActionListener {
 	public void InitGame() {
 		aktuellerindex = 0;
 		punkte = 0;
-		aktuellefrage = Client_main.Allefragen.get(0);
+		aktuellefrage = Main.Allefragen.get(0);
 		SetButtons();
 	}
 	
@@ -71,7 +72,6 @@ public class Panel_game extends JPanel implements ActionListener {
 		buttonPanel1.setLayout(new BoxLayout(buttonPanel1, BoxLayout.LINE_AXIS));
 		
 		buttonPanel1.add(Box.createRigidArea(new Dimension(50, 0)));
-		//buttonPanel1.add(Box.createHorizontalGlue());
 		
     	but_antwort1.setSize(d);
     	but_antwort1.setMinimumSize(d);
@@ -151,9 +151,7 @@ public class Panel_game extends JPanel implements ActionListener {
     	
 		buttonPanel3.add(Box.createRigidArea(new Dimension(50, 0)));
     	
-    	add(buttonPanel3);
-    	
-    	
+    	add(buttonPanel3);    	
 	}
 	
 	@Override
@@ -237,35 +235,15 @@ public class Panel_game extends JPanel implements ActionListener {
 			if(aktuellerindex == 9) {
 				System.out.println("Richtige Antworten: " + punkte);
 				Highscore_eintrag neuerEintrag = new Highscore_eintrag();
-				neuerEintrag.Nutzername = Client_main.AktNutzername;
+				neuerEintrag.Nutzername = Main.AktNutzername;
 				neuerEintrag.Punkte = punkte;
-				Client_main.Highscore_speichern(neuerEintrag);
-				//Client_main.Highscore_laden();
-				Client_main.GUI.zeigHighscore();
+				Main.Highscore_speichern(neuerEintrag);
+				Main.GUI.zeigHighscore();
 				return;				
 			}
 			aktuellerindex++;
-			aktuellefrage = Client_main.Allefragen.get(aktuellerindex);
+			aktuellefrage = Main.Allefragen.get(aktuellerindex);
 			SetButtons();
-			
-			/*but_antwort1.setEnabled(true);
-			but_antwort2.setEnabled(true);
-			but_antwort3.setEnabled(true);
-			but_antwort4.setEnabled(true);
-			but_antwort1.setOpaque(true);
-			but_antwort2.setOpaque(true);
-			but_antwort3.setOpaque(true);
-			but_antwort4.setOpaque(true);
-			but_antwort1.setBackground(Color.WHITE);
-			but_antwort2.setBackground(Color.WHITE);
-			but_antwort3.setBackground(Color.WHITE);
-			but_antwort4.setBackground(Color.WHITE);
-			fragenfeld.setText(aktuellefrage.Frage);			
-			but_antwort1.setText("<html><div style='max-width:180px;'>"+aktuellefrage.Antwort1+"</div></html>");
-			but_antwort2.setText("<html><div style='max-width:180px;'>"+aktuellefrage.Antwort2+"</div></html>");
-			but_antwort3.setText("<html><div style='max-width:180px;'>"+aktuellefrage.Antwort3+"</div></html>");
-			but_antwort4.setText("<html><div style='max-width:180px;'>"+aktuellefrage.Antwort4+"</div></html>");
-			but_nextquestion.setVisible(false); */
 		}
 	}
 	

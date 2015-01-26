@@ -1,4 +1,4 @@
-package server;
+package functions;
 
 public class Highscore_eintrag implements java.io.Serializable, Comparable<Highscore_eintrag>  {	
 	 

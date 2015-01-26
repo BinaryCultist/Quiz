@@ -56,11 +56,11 @@ public class Panel_menu extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource() == but_newgame) {
 			
-			Client_main.GUI.zeigGame();
+			Main.GUI.zeigGame();
 		}
 		
 		if(event.getSource() == but_highscore) {
-			Client_main.GUI.zeigHighscore();
+			Main.GUI.zeigHighscore();
 		}
 		
 		if(event.getSource() == but_quit) {

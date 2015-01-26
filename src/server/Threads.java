@@ -1,22 +1,38 @@
 package server;
 
+//import gui.Main;
+
 import java.net.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.io.*;
 
-public class Server_thread extends Thread {
+import functions.Befehle;
+import functions.Highscore_eintrag;
+
+public class Threads extends Thread {
     private Socket socket = null;
     
-    //private Integer Summe = 0;
     private static ArrayList<Highscore_eintrag> Highscore = new ArrayList<Highscore_eintrag>();
 
-    public Server_thread(Socket socket) {
+    public Threads(Socket socket) {
         super("Multi-Thread");
         this.socket = socket;
     }
     
-    public void run() {  	
+    public void run() {
+    	
+
+    	
+    	
+    	/*String path = Threads.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+		String decodedPath;
+		try {
+			decodedPath = URLDecoder.decode(path, "UTF-8");
+			System.out.println(decodedPath);
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		} */
     	
     	try (
         	//OutputStream os = socket.getOutputStream();
@@ -30,19 +46,14 @@ public class Server_thread extends Thread {
         ) {
     		Object input = null;	
             while ((input = in.readObject()) != null) {
-            	if (input.getClass().equals(Server_befehl.class)){
-            		ProcessOrder(out, in, (Server_befehl)input);
+            	if (input.getClass().equals(Befehle.class)){
+            		ProcessOrder(out, in, (Befehle)input);
             	}
             }
+            in.close();
+            out.close();
             socket.close();
-        	
-        		/*Questionlist ql = new Questionlist(); // Konstruktor für die Übergabe der Fragenliste
-            	ql.fragenausdateilesen(); // Fragenliste wird erstellt
-            	System.out.println("Fragen gelesen erfolgt");
-            	oos.writeObject(ql.allefragen()); // Fragen werden an OutputStream übergeben und zum Client gesendet
-            	oos.flush();
-            	oos.reset();*/
-        	       	
+            System.exit(0);
         	
         	} catch (IOException e) {
         		e.printStackTrace();
@@ -51,11 +62,12 @@ public class Server_thread extends Thread {
     		}
     }
     
-	private void ProcessOrder(ObjectOutputStream out, ObjectInputStream in, Server_befehl befehl) throws IOException {
+	private void ProcessOrder(ObjectOutputStream out, ObjectInputStream in, Befehle befehl) throws IOException {
 		System.out.println("Server - Process Order: " + befehl.toString());
 		switch (befehl) {
 		case Login:
 			try {
+				@SuppressWarnings("unused")
 				String user = (String)in.readObject();
 				String pass = (String)in.readObject();
 				Boolean isLoginOk = false;
@@ -95,12 +107,7 @@ public class Server_thread extends Thread {
 			
 				out.writeObject(Highscore);
 				out.flush();
-				out.reset();
-			/*
-			try {
-				Integer zahl = (Integer)in.readObject();
-				Summe = Summe + zahl;
-				outStream.writeObject(Summe); */					
+				out.reset();					
 			break;
 		default:
 			break;

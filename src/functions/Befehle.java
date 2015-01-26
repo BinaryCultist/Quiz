@@ -1,6 +1,6 @@
-package server;
+package functions;
 
-public enum Server_befehl {
+public enum Befehle {
 	Login,
 	Fragenholen,
 	Highscore_speichern, 
